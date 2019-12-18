@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <!-- Reset CSS -->
+  <link rel="stylesheet" type="text/css" href="./assets/css/reset-min.css">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+
+  <!-- Google Fonts-->
+  <link href="https://fonts.googleapis.com/css?family=Major+Mono+Display|Roboto+Mono&display=swap" rel="stylesheet">
+
+  <!-- Custom css-->
+ <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+
+  <!-- Browser Tab Icon-->
+  <link rel="icon" href="./assets/images/bs32.png">
+  <title>Hangman</title>
+</head>
+<body>
+
+  <div class="container-fluid">
+
+    <div id="gallows">
+
+    </div>
+
+    <div class="row word-row flex-nowrap">
+      <div class="col">
+        <input class="btn btn-dark letter" id="0" type="button" value="">
+        <input class="btn btn-dark letter" id="1" type="button" value="">
+        <input class="btn btn-dark letter" id="2" type="button" value="">
+        <input class="btn btn-dark letter" id="3" type="button" value="">
+        <input class="btn btn-dark letter" id="4" type="button" value="">
+        <input class="btn btn-dark letter" id="5" type="button" value="">
+        <input class="btn btn-dark letter" id="6" type="button" value="">
+        <input class="btn btn-dark letter" id="7" type="button" value="">
+        <input class="btn btn-dark letter" id="8" type="button" value="">
+        <input class="btn btn-dark letter" id="9" type="button" value="">
+        <input class="btn btn-dark letter" id="10" type="button" value="">
+        <input class="btn btn-dark letter" id="11" type="button" value="">
+        <input class="btn btn-dark letter" id="12" type="button" value="">
+      </div>
+    </div>
+
+    <div class="row keys-row flex-nowrap">
+      <div class="col align-center">
+        <input class="btn btn-secondary key" id="A" type="button" value="A" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="B" type="button" value="B" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="C" type="button" value="C" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="D" type="button" value="D" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="E" type="button" value="E" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="F" type="button" value="F" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="G" type="button" value="G" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="H" type="button" value="H" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="I" type="button" value="I" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="J" type="button" value="J" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="K" type="button" value="K" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="L" type="button" value="L" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="M" type="button" value="M" onClick="process_Key(this.id)">
+      </div>
+    </div>
+
+    <div class="row keys-row flex-nowrap">
+      <div class=col>
+        <input class="btn btn-secondary key" id="N" type="button" value="N" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="O" type="button" value="O" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="P" type="button" value="P" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="Q" type="button" value="Q" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="R" type="button" value="R" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="S" type="button" value="S" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="T" type="button" value="T" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="U" type="button" value="U" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="V" type="button" value="V" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="W" type="button" value="W" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="X" type="button" value="X" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="Y" type="button" value="Y" onClick="process_Key(this.id)">
+        <input class="btn btn-secondary key" id="Z" type="button" value="Z" onClick="process_Key(this.id)">
+
+      </div>
+    </div>
+    <div class="data-container">
+      <div class="news">
+        <div class="col news-data">
+          <h3 id="bigNews">Major News</h3>
+        </div>
+      </div>
+      <div class="row flex-nowrap">
+        <div class="col-5 data-header dh1 flex-nowrap">
+          <span>GAME STATS</span>
+          <div class="row flex-nowrap">
+            <div class="col-7 data-label dl">
+              <span>GUESSES LEFT:</span>
+            </div>
+            <div class="col-5 data" id="tries">
+              <span>1</span>
+            </div>
+          </div>
+          <div class="row flex-nowrap">
+            <div class="col-7 data-label dl">
+              <span>WORD%:</span>
+            </div>
+            <div class="col-5 data" id="word-p">
+              <span>2</span>
+            </div>
+          </div>
+          <div class="row flex-nowrap">
+            <div class="col-7 data-label dl">
+              <span>KEY% USED:</span>
+            </div>
+            <div class="col-5 data" id="key-used">
+              <span>3</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-2 flex-nowrap">
+          <span></span>
+        </div>
+        <div class="col-5 data-header dh2 flex-nowrap">
+          <span>ROUND STATS</span>
+          <div class="row flex-nowrap">
+            <div class="col-6 data-label">
+              <span>RECORD:</span>
+            </div>
+            <div class="col-6 data" id="record">
+              <span>4</span>
+            </div>
+          </div>
+          <div class="row flex-nowrap">
+            <div class="col-6 data-label">
+              <span>ROUND:</span>
+            </div>
+            <div class="col-6 data" id="round">
+              <span>5</span>
+            </div>
+          </div>
+          <div class="row flex-nowrap">
+            <div class="col-6 data-label">
+              <span>REPEATS:</span>
+            </div>
+            <div class="col-6 data" id="repeats">
+              <span>6</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+ 
+
+
+    
+    <!-- Custom JavaScript -->
+    <script src="assets/js/script.js" type="text/javascript"></script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://kit.fontawesome.com/53e5088cef.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+</html>
