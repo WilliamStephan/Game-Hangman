@@ -2,59 +2,45 @@ console.log("wheel.js is linked");
 
 class Wheel {
     constructor(slots) {
-    this.wheel = slots;
-    this.weights;
-    this.slotRnd;
-    this.totalWeight;
-    this.spinLast = "NEW GAME!"
-    }
-    
-    spin() {  
-        this.spinLast = this.wheel[this.slotRnd[rndWeighted(this.weights)]];
+        this.wheel = slots;
+        this.weights;
+        // this.slotRnd;
+        this.totalWeight;
+        this.spinLast = "NEW GAME!"
+        this.currentDegree = 0;
         
-        /* 
-        e = document.getElementById('wheel')
-        e.removeAttribute('style');
-        var deg = 500 + 720;
-        var css = 'transform: rotate(' + deg + 'deg);';
-        e.setAttribute('style', css);
-*/
+    }
 
+    spin() {
+        var rndSpin = rndWeighted(this.weights); // weighted random spin based on like wheel slat area
+        var subLoc  = Math.floor(Math.random() * (this.wheel[rndSpin].length - 1) + 1); // random for multiple same value wheel locations
+        var offSet = 360 - this.wheel[rndSpin][subLoc]; // offset to keep the wheel synced 
+        this.currentDegree = this.currentDegree + (this.wheel[rndSpin][subLoc] + 1080); // where the spin will land, plus 3 loops
+     
+        rotateWheel(wheel.currentDegree.toString()); // spin wheel - took way to long to figure out
+        
+        this.currentDegree = this.currentDegree + offSet; // zero wheel position for next spin         
+        this.spinLast = this.wheel[rndSpin][0]  // save spin location 
+        displaySpin.textContent = this.spinLast; // display spin
     }
 }
 
-function initWheel(slotsArr, weightsArr) {
-    wheel = new Wheel(slotsArr);
-    wheel.weights = weightsArr;
-    wheel.slotRnd = randomIndex(slotsArr.length)    
-    wheel.totalWeight =  arrSum(wheel.weights);
+function initWheel() {
+    var d2Arr = createArray(wheelItems.length, 1); // d2 Array structure
+
+    for (i = 0; i < wheelItems.length; i++) { 
+        d2Arr[i][0] = wheelItems[i]; // wheel items (game prizes or punishments)
+        for (k = 0; k < slotLocation[i].length; k++) {
+            d2Arr[i][k + 1] = slotLocation[i][k]; // location in degrees on wheel (multiple)
+        }
+    }
+
+    wheel = new Wheel(d2Arr);
+    wheel.weights = wheelWeights; // random weighting based on times and size on wheel  
+    wheel.totalWeight = arrSum(wheel.weights);
 }
 
-/*
-
-var img = document.querySelector('img');
-img.addEventListener('click', onClick, false);
-
-
-function onClick() {
-    this.removeAttribute('style');
-    
-    var deg = 500 + Math.round(Math.random() * 500);
-    
-    var css = '-webkit-transform: rotate(' + deg + 'deg);';
-    
-    this.setAttribute(
-        'style', css
-    );
+function rotateWheel(rotateMe) {  // rotate wheel function
+  rotateDeg = (rotateMe) 
+  Root.style.setProperty('--turn', rotateDeg + "deg") // using CSS variable 
 }
-
-<img width="400" height="400" src="http://upload.wikimedia.org/wikipedia/commons/7/7d/European_roulette_wheel.svg" />
-
-
-
-img {
-    -webkit-transition: -webkit-transform 2s ease-out;
-}
-
-*/
-

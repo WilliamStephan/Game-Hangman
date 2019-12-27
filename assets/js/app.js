@@ -1,12 +1,20 @@
 console.log("app.js is linked");
 const debug = true;
+
+const Root     = document.documentElement, gRoot    = getComputedStyle(Root);
+
+// const rootE = document.documentElement;
+// const getRoot = getComputedStyle(rootE);
 const displayBoard = document.getElementById("board");
 const displayHint = document.getElementById("hint");
 const displaySpin = document.getElementById("spin");
 const gameData = ["bloodcurdling Test Me", "schizophrenia", "country road take me home", "flabbergasted", "port and starboard", "globalization", "consciousness", "weightlifting", "championship match", "mathematician", "razzamatazzes", "hypothesizing", "new baby buggy"]
 const gameHint = ["strange phrase", "a condition", "song", "a condition", "a place", "business speak", "a condition", "an activity", "event", "person", "a condition", "a condition", "thing"]
-const wheelItems = ["$500", "$550", "$600", "$650", "$700", "$800", "$900", "$2500", "LOSE TURN", "FREE TURN", "BANKRUPT!"];
-const wheelWeights = [21, 8, 17, 13, 13, 4, 4, 4, 4, 8, 4]; // 24 wheel slots and weighting - x/100
+const wheelItems = ["500", "550", "600", "650", "700", "800", "900", "2500", "1000000", "LOSE TURN", "FREE TURN", "BANKRUPT"];
+const wheelWeights = [21, 4, 17, 13, 13, 4, 4, 4, 1, 4, 4, 11]; // 24 wheel slots and weighting - x/100
+const slotLocation = [[45, 75, 195, 270],[210],[180, 225, 300, 330],[60, 150, 285],[120, 255, 315],[90],[30],[360],[240],[105],[135],[15, 165, 235, 245]]
+
+var rotateDeg = parseInt(gRoot.getPropertyValue('--turn'))
 
 
 
@@ -17,7 +25,7 @@ start();
 
 function start() {
     initGame(); // initialize game object
-    initWheel(wheelItems, wheelWeights); // initialize wheel and weighting
+    initWheel(); // initialize wheel and weighting
     if (debug) { console.log(game) }
     if (debug) { console.log(wheel) }
     newRound();
@@ -54,25 +62,28 @@ function newRound() {
 
 // keyboard event
 function keyStroke(e) {
-    guess = e.key.toUpperCase();
-    e = document.getElementById(guess);
-    if (e.classList.contains('keyboard')) { processGuess(e); }
-
+    if (document.getElementById(e.key.toUpperCase())) { // checks if div (e.key) exists before processing 
+        guess = e.key.toUpperCase();
+        e = document.getElementById(guess);
+        if (e.classList.contains('keyboard')) { processGuess(e); }
+    }
 }
-
 
 
 // click keyboard event
 function keyClick(e) {
     e = window.event ? event.srcElement : e.target;
     guess = e.getAttribute('id');
+    console.log(guess, e);
     if (e.classList.contains('keyboard')) { processGuess(e); }
+    
+    if (guess === 'wheel' || guess === 'wof') {
+        wheel.spin();
 
-    if (e.classList.contains('spinner')) {
-        alert("spinner")
-
+     
     }
 }
+
 
 
 

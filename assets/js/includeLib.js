@@ -5,12 +5,12 @@ console.log("includeLib.js is linked");
 // will randomize [0 to x] positive int sequence, returns array (length.x+1) 
 // used for creating an alternate index to randomize list orders  
 function randomIndex(arrLength) {
-    let randIndex =[];
+    let randIndex = [];
     let unique = false;
     for (i = 0; i < arrLength; i++) {
         randIndex.push(Math.floor(Math.random() * arrLength));
         while (!unique) {  // loops until unique random is created
-            unique = true; 
+            unique = true;
             if (i > 0) { // skip first array element (always unique)
                 for (k = 0; k < i; k++) {
                     if (randIndex[k] === randIndex[i]) { unique = false }
@@ -36,8 +36,6 @@ function rndWeighted(arrOfWeights) {
     }
 }
 
-
-
 // returns numbers of vowels via regex
 function getVowels(str) {
     var vowels = str.match(/[aeiou]/gi);
@@ -61,7 +59,7 @@ function uniqueString(str) {
     str = str.replace(/\s+/g, ''); // clear whitespace via regex
     var uniqueStr = str.charAt(0); // load first char - always unique
     for (i = 1; i < str.length; i++) {
-        if (!uniqueStr.includes(str.charAt(i))) { 
+        if (!uniqueStr.includes(str.charAt(i))) {
             uniqueStr += str.charAt(i); // add to the string if unique
         }
     }
@@ -69,18 +67,20 @@ function uniqueString(str) {
 }
 
 // function for creating multi-dimensional arrays - SO, Matthew Crumley
+// createArray(10, 2) = arr[10][2], createArray(10, 2, 2) = arr[10][2][2]
 function createArray(length) {
     var arr = new Array(length || 0),
         i = length;
     if (arguments.length > 1) {
         var args = Array.prototype.slice.call(arguments, 1);
-        while(i--) arr[length-1 - i] = createArray.apply(this, args);
+        while (i--) arr[length - 1 - i] = createArray.apply(this, args);
     }
     return arr;
 }
 
+// function to sum the values in an array
 function arrSum(arr) {
-    return arr.reduce(function(a,b){
-      return a + b
+    return arr.reduce(function (a, b) {
+        return a + b
     }, 0);
 }

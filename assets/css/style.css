@@ -1,3 +1,7 @@
+:root {
+    --turn : 0deg;
+}
+
 html { /* VERIFIED */ 
     font-size: 26px;
     font-family: Arial, sans-serif;
@@ -27,10 +31,39 @@ body { /* VERIFIED */
 }
 
 
-.wheel {
-    transition: transform 2s ease-out;
+
+#wheel { /* VERIFIED */ 
+    transform: rotate( var(--turn) );
+    transition: transform 3s ease-out;
 }
 
+#wof {
+    position: relative;
+    top: 0rem;
+    height: auto;
+}
+
+#bk-wheel {
+    position: relative;
+    top: 0rem;
+    z-index: 1;
+
+}
+
+#wheel {
+   position: absolute;
+    top: 0rem;
+    z-index: 5;
+
+}
+
+#wof img { /* VERIFIED */ 
+    display: block;
+    max-width: 400rem;
+    max-height: 400rem;
+    width: auto;
+    height: auto;
+}
 
 .word-row {
     justify-content: center;

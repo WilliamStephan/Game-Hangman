@@ -1,5 +1,6 @@
 console.log("game.js is linked")
 
+
 class Game {
     constructor(game, hint) {
         this.game = game;
