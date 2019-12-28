@@ -9,6 +9,7 @@ class Game {
         this.wins = 0;
         this.losses = 0;
         this.round = 0;
+        this.rounds = 10;
         this.correct = 0;
         this.incorrect = 0;
         this.gameScore = 0;

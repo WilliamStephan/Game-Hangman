@@ -1,6 +1,4 @@
-console.log("includeLib.js is linked");
-
-// My javascript standard function library
+console.log("includeLib.js is linked - reusable function library (other apps)"); // reusable function library (other apps) 
 
 // will randomize [0 to x] positive int sequence, returns array (length.x+1) 
 // used for creating an alternate index to randomize list orders  
@@ -24,7 +22,6 @@ function randomIndex(arrLength) {
 }
 
 // weighted random algorithm
-
 function rndWeighted(arrOfWeights) {
     var sumOfWeights = arrSum(arrOfWeights);
     var rnd = Math.floor(Math.random() * (sumOfWeights - 1));
@@ -41,6 +38,7 @@ function getVowels(str) {
     var vowels = str.match(/[aeiou]/gi);
     return vowels === null ? 0 : vowels.length;
 }
+
 
 // returns number of words in a string via regex
 function totalWords(str) {

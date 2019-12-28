@@ -18,18 +18,15 @@ class Letters {
 
     // sets letters to display 
     makeVisible(char) { 
-        var correctGuess = 0; 
         for (i = 0; i < this.visible.length; i++) {
             if ( char === this.letters[i][1] ) {
                 if (this.visible[i] != 1) { // check if already selected
-                    this.visible[i] = 1; 
-                    correctGuess = 1; 
+                    this.visible[i] = 1;  
                 }
-                 
             }
         }
-        return correctGuess;
     }
+
 } 
 
 function initLetters(str, arr) { // (puzzle text, array of 0's length of puzzle text)

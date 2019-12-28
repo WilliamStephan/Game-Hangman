@@ -13,7 +13,16 @@ class Puzzle {
     this.correct = 0;
     this.incorrect = 0;
     this.puzzleScore = 0;
+    this.alpha = "";
     }
+    setUsed(pick) {
+        if (this.alpha.length > 0) { 
+            if (this.alpha.includes(pick)) { return; }    
+        }
+        this.alpha += pick;
+        return(this.puzzle.split(pick).length - 1);
+    }
+    
 }
 
 function initPuzzle(sentence, triesAllowed) {
