@@ -11,148 +11,158 @@
   <link rel="stylesheet" type="text/css" href="./assets/css/reset-min.css">
 
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"
+    integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
   <!-- Google Fonts-->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
 
   <!-- Custom css-->
- <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
+  <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
 
   <!-- Browser Tab Icon-->
   <link rel="icon" href="./assets/images/bs32.png">
   <title>Hangman of Fortune</title>
 </head>
+
 <body>
-  
+
   <div class="nav-container">
     <nav class="navbar navbar-expand-md navbar-light ">
-      <div class="site-name"><a class="navbar-brand" href="#"><h2>BILL STEPHAN</h2></a></div>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="site-name"><a class="navbar-brand" href="#">Hangman of Fortune</a></div>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <a class="nav-item nav-link active nb1" href="#">About<span class="sr-only">(current)</span></a>
-          <a class="nav-item nav-link nb2" href="portfolio.html">Portfolio</a>
-          <a class="nav-item nav-link nb3" href="contact.html">Contact</a>
+          <input class="btn btn-primary menu" id="reset" type="button" value="Reset" onclick="this.blur();">
+          <input class="btn btn-primary menu" id="rules" type="button" value="Rules" onclick="this.blur();">
+          <input class="btn btn-primary menu" id="about" type="button" value="About" onclick="this.blur();">
         </div>
-      </div><!-- .collapse .navbar-collapse .justify-content-end #navbarNavAltMarkup -->
+      </div>
     </nav>
-  </div><!-- .nav-container -->
-
-  <div id="scores">
-    <p><span id="game" class="enMoney"></span></p>
-    <p><span id="round" class="enMoney"></span></p>
   </div>
 
-<div class="container-fluid">
-  <div class="row keys-row flex-nowrap no-gutters"> 
+  <div class="container-fluid">
+    <div class="row keys-row flex-nowrap no-gutters">
+
+      <div id="scores">
+        <p><span id="game" class="enMoney"></span></p>
+        <p><span id="round" class="enMoney"></span></p>
+        <p><span id="left"></span></p>
+      </div>
+
+    </div>
     
-    
-  </div>
-  <div class="row keys-row flex-nowrap no-gutters"> 
-    <div id ="hangman" class="col">      
-      <img id="h-0" width="266rem" height="400rem" src="assets/images/h-00.png">
-      <img id="h-1" class="gallow" width="266rem" height="400rem" src="assets/images/h-01.png">
-      <img id="h-2" class="gallow" width="266rem" height="400rem" src="assets/images/h-02.png">
-      <img id="h-3" class="gallow" width="266rem" height="400rem" src="assets/images/h-03.png">
-      <img id="h-4" class="gallow" width="266rem" height="400rem" src="assets/images/h-04.png">
-      <img id="h-5" class="gallow" width="266rem" height="400rem" src="assets/images/h-05.png">
-      <img id="h-6" class="gallow" width="266rem" height="400rem" src="assets/images/h-06.png">
-      <img id="h-7" class="gallow" width="266rem" height="400rem" src="assets/images/h-07.png">
-      <img id="h-8" class="gallow" width="266rem" height="400rem" src="assets/images/h-08.png">
-      <img id="h-9" class="gallow" width="266rem" height="400rem" src="assets/images/h-09.png">
-      <img id="h-10" class="gallow" width="266rem" height="400rem" src="assets/images/h-10.png">
-      <img id="h-11" class="gallow" width="266rem" height="400rem" src="assets/images/h-11.png">
+    <div class="row keys-row flex-nowrap no-gutters">
+      <div id="hangman" class="col">
+        <img id="h-0" width="266rem" height="400rem" src="assets/images/h-00.png">
+        <img id="h-1" class="gallow" width="266rem" height="400rem" src="assets/images/h-01.png">
+        <img id="h-2" class="gallow" width="266rem" height="400rem" src="assets/images/h-02.png">
+        <img id="h-3" class="gallow" width="266rem" height="400rem" src="assets/images/h-03.png">
+        <img id="h-4" class="gallow" width="266rem" height="400rem" src="assets/images/h-04.png">
+        <img id="h-5" class="gallow" width="266rem" height="400rem" src="assets/images/h-05.png">
+        <img id="h-6" class="gallow" width="266rem" height="400rem" src="assets/images/h-06.png">
+        <img id="h-7" class="gallow" width="266rem" height="400rem" src="assets/images/h-07.png">
+        <img id="h-8" class="gallow" width="266rem" height="400rem" src="assets/images/h-08.png">
+        <img id="h-9" class="gallow" width="266rem" height="400rem" src="assets/images/h-09.png">
+        <img id="h-10" class="gallow" width="266rem" height="400rem" src="assets/images/h-10.png">
+      </div>
+      <div id="wof" class="col">
+        <img id="bk-wheel" width="400rem" height="400rem" src="assets/images/wbg.jpg">
+        <img id="bk-nswheel" width="400rem" height="400rem" src="assets/images/nsbg.jpg">
+        <img id="wheel" width="400rem" height="400rem" src="assets/images/wheel.png">
+      </div>
     </div>
-    <div id = "wof" class="col">
-      <img id="bk-wheel" width="400rem" height="400rem" src="assets/images/wbg.jpg">
-      <img id="bk-nswheel" width="400rem" height="400rem" src="assets/images/nsbg.jpg">
-      <img id="wheel" width="400rem" height="400rem" src="assets/images/wheel.png">
-    </div>
-  </div>
-   
-  <div class="row keys-row flex-nowrap"> 
-    <div class="col">
-      <p class="mono-type" id="board"></p>
-      <p class="mono-type√" id="hint"></p>
-      <p class="mono-type" id="spin"></p>
-    </div>
-  </div>
 
-  <div class="row keys-row no-gutters flex-nowrap">    
-    <div class="col" no-gutters>
-      <input class="btn btn-primary keyboard" id="A" type="button" value="A">
-      <input class="btn btn-primary keyboard" id="B" type="button" value="B">
-      <input class="btn btn-primary keyboard" id="C" type="button" value="C">
-      <input class="btn btn-primary keyboard" id="D" type="button" value="D">
-      <input class="btn btn-primary keyboard" id="E" type="button" value="E">
-      <input class="btn btn-primary keyboard" id="F" type="button" value="F">
-      <input class="btn btn-primary keyboard" id="G" type="button" value="G">
-      <input class="btn btn-primary keyboard" id="H" type="button" value="H">
-      <input class="btn btn-primary keyboard" id="I" type="button" value="I">
-      <input class="btn btn-primary keyboard" id="J" type="button" value="J">
-      <input class="btn btn-primary keyboard" id="K" type="button" value="K">
-      <input class="btn btn-primary keyboard" id="L" type="button" value="L">
-      <input class="btn btn-primary keyboard" id="M" type="button" value="M">
+    <div class="row keys-row flex-nowrap">
+      <div class="col">
+        <p class="mono-type" id="board"></p>
+        <p class="mono-type√" id="hint"></p>
+        <p class="mono-type" id="spin"></p>
+      </div>
     </div>
-  </div>
 
-  <div class="row keys-row flex-nowrap"> 
-    <div class=col>
-      <input class="btn btn-primary keyboard" id="N" type="button" value="N">
-      <input class="btn btn-primary keyboard" id="O" type="button" value="O">
-      <input class="btn btn-primary keyboard" id="P" type="button" value="P">
-      <input class="btn btn-primary keyboard" id="Q" type="button" value="Q">
-      <input class="btn btn-primary keyboard" id="R" type="button" value="R">
-      <input class="btn btn-primary keyboard" id="S" type="button" value="S">
-      <input class="btn btn-primary keyboard" id="T" type="button" value="T">
-      <input class="btn btn-primary keyboard" id="U" type="button" value="U">
-      <input class="btn btn-primary keyboard" id="V" type="button" value="V">
-      <input class="btn btn-primary keyboard" id="W" type="button" value="W">
-      <input class="btn btn-primary keyboard" id="X" type="button" value="X">
-      <input class="btn btn-primary keyboard" id="Y" type="button" value="Y">
-      <input class="btn btn-primary keyboard" id="Z" type="button" value="Z">
+    <div class="row keys-row no-gutters flex-nowrap">
+      <div class="col" no-gutters>
+        <input class="btn btn-primary keyboard" id="A" type="button" value="A" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="B" type="button" value="B" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="C" type="button" value="C" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="D" type="button" value="D" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="E" type="button" value="E" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="F" type="button" value="F" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="G" type="button" value="G" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="H" type="button" value="H" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="I" type="button" value="I" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="J" type="button" value="J" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="K" type="button" value="K" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="L" type="button" value="L" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="M" type="button" value="M" onclick="this.blur();">
+      </div>
+    </div>
+
+    <div class="row keys-row flex-nowrap">
+      <div class=col>
+        <input class="btn btn-primary keyboard" id="N" type="button" value="N" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="O" type="button" value="O" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="P" type="button" value="P" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="Q" type="button" value="Q" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="R" type="button" value="R" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="S" type="button" value="S" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="T" type="button" value="T" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="U" type="button" value="U" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="V" type="button" value="V" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="W" type="button" value="W" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="X" type="button" value="X" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="Y" type="button" value="Y" onclick="this.blur();">
+        <input class="btn btn-primary keyboard" id="Z" type="button" value="Z" onclick="this.blur();">
+      </div>
     </div>
   </div>
-    
-</div>
 
-<div class="container-fluid footer-container">
-  <div class="footer-sub">
-    <div class="left-side">
-      <span class=social>
-        <a id=sm1 href="https://twitter.com/StephanBill" target="_blank"><i class="fab fa-twitter-square"></i></a>
-        <a id=sm2 href="https://www.facebook.com/bill.stephan.315" target="_blank"><i class="fab fa-facebook-square"></i></a>
-        <a id=sm3 href="https://www.instagram.com/2tallbill" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a id=sm4 href="https://www.linkedin.com/in/stephanbill" target="_blank"><i class="fab fa-linkedin"></i></a>
-        <a id=sm5 href="https://twitter.com/StephanBill" target="_blank"><i class="fab fa-flickr"></i></a>
-      </span>
+  <div class="container-fluid footer-container">
+    <div class="footer-sub">
+      <div class="left-side">
+        <span class=social>
+          <a id=sm1 href="https://twitter.com/StephanBill" target="_blank"><i class="fab fa-twitter-square"></i></a>
+          <a id=sm2 href="https://www.facebook.com/bill.stephan.315" target="_blank"><i
+              class="fab fa-facebook-square"></i></a>
+          <a id=sm3 href="https://www.instagram.com/2tallbill" target="_blank"><i class="fab fa-instagram"></i></a>
+          <a id=sm4 href="https://www.linkedin.com/in/stephanbill" target="_blank"><i class="fab fa-linkedin"></i></a>
+          <a id=sm5 href="https://twitter.com/StephanBill" target="_blank"><i class="fab fa-flickr"></i></a>
+        </span>
+      </div>
+      <div class="right-side copyright">
+        <p>© 2019 Copyright:
+          <a href="https://williamstephan.github.io">OldDog.dev</a></p>
+      </div>
     </div>
-    <div class="right-side copyright">
-      <p>© 2019 Copyright: 
-      <a href="https://williamstephan.github.io">OldDog.dev</a></p>
-    </div>
-  </div>
-</div><!-- .container-fluid .footer-container -->
+  </div><!-- .container-fluid .footer-container -->
 
-<!-- Custom JavaScript -->
-<script src="./assets/js/includeLib.js"></script>
-<script src="./assets/js/game.js"></script>
-<script src="./assets/js/puzzle.js"></script>
-<script src="./assets/js/letter.js"></script>
-<script src="./assets/js/wheel.js"></script>
-<script src="./assets/js/appLib.js"></script>
-<script src="./assets/js/app.js"></script>
+  <!-- Custom JavaScript -->
 
+  <script src="./assets/js/includeLib.js"></script>
+  <script src="./assets/js/audio.js"></script>
+  <script src="./assets/js/game.js"></script>
+  <script src="./assets/js/puzzle.js"></script>
+  <script src="./assets/js/letters.js"></script>
+  <script src="./assets/js/wheel.js"></script>
+  <script src="./assets/js/appLib.js"></script>
+  <script src="./assets/js/app.js"></script>
 
-
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://kit.fontawesome.com/53e5088cef.js" crossorigin="anonymous"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://kit.fontawesome.com/53e5088cef.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+    integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
 
 </body>
+
 </html>

@@ -8,26 +8,17 @@ const dispHint = document.getElementById("hint");
 const dispSpin = document.getElementById("spin");
 const dispRound = document.getElementById("round");
 const dispGame = document.getElementById("game");
+const dispLeft = document.getElementById("left");
 const gameData = ["bloodcurdling Test Me", "schizophrenia", "country road take me home", "flabbergasted", "port and starboard", "globalization", "consciousness", "weightlifting", "championship match", "mathematician", "razzamatazzes", "hypothesizing", "new baby buggy"]
 const gameHint = ["strange phrase", "a condition", "song", "a condition", "a place", "business speak", "a condition", "an activity", "event", "person", "a condition", "a condition", "thing"]
 const wheelItems = ["500", "550", "600", "650", "700", "800", "900", "2500", "1000000", "LOSE TURN", "FREE TURN", "BANKRUPT"];
 const wheelWeights = [21, 4, 17, 13, 13, 4, 4, 4, 1, 4, 4, 11]; // 24 wheel slots and weighting - x/100
 const slotLocation = [[45, 75, 195, 270], [210], [180, 225, 300, 330], [60, 150, 285], [120, 255, 315], [90], [30], [360], [240], [105], [135], [15, 165, 235, 245]]
-const effect = [["ding", "assets/sound/ding.wav"], ["bankrupt", "assets/sound/bankrupt.wav"], ["spin", "assets/sound/spin.wav"], ["reveal", "assets/sound/reveal.wav"], ["solved", "assets/sound/solved.wav"], ["buzzer", "assets/sound/buzzer.wav"], ["countdown", "assets/sound/countdown.wav"], ["choose", "assets/sound/choose.wav"], ["sax", "assets/sound/sax.wav"], ["wand", "assets/sound/wand.wav"], ["gasp", "assets/sound/gasp.wav"], ["scream", "assets/sound/scream.wav"]];
 
 var rotateDeg = parseInt(gRoot.getPropertyValue('--turn')) // CSS variable for spin rotation animation
 var hangImgCount = 0; // concatenated to ID for current hangman image (low-tech animation)
-
 var spinEnabled = true;
 var keysEnabled = false;
-
-
-var snd = {}; // sound effects table for fast key access: snd.effect 
-for (i = 0; i < effect.length; i++) {
-    snd[effect[i][0]] = effect[i][1];
-}
-
-console.log(snd);
 
 document.onkeyup = keyStroke;
 document.body.onclick = keyClick;
@@ -45,148 +36,149 @@ function start() {
 
 // keyboard event
 function keyStroke(e) {
-    if (keysEnabled) {
-        if (document.getElementById(e.key.toUpperCase())) { // checks if div (e.key) exists before processing 
-            guess = e.key.toUpperCase();
-            e = document.getElementById(guess);
-            if (e.classList.contains('keyboard')) {
-
-                hideKeys();
-                setTimeout(function () {
-                    showPush();
-                }, 2000);
-
-                // process guess
-                processGuess(e);
-            }
+    if (spinEnabled && e.key === "Enter") { // spin the wheel with a keyboard enter
+        wheel.spin(); // spin the wheel! 
+        hidePush() // disable wheel
+        processSpin();
+        if (puzzle.puzzleStatus === "loss") { roundLoss(); }
+        if (puzzle.puzzleStatus === "win") { roundWin(); }
+    }
+    if (keysEnabled && document.getElementById(e.key.toUpperCase())) {
+        guess = e.key.toUpperCase();
+        e = document.getElementById(guess);
+        if (e.classList.contains('keyboard')) {
+            if (puzzle.alpha.includes(guess)) { // filters duplicates
+                soundPluck.play()
+                return; 
+            } 
+            hideKeys();
+            setTimeout(function () { // set timing for wheel activation. 
+                showPush();
+            }, 1000);
+            processGuess(e);  // send key validated keystroke for processing
         }
     }
 }
 
 // click event
-function keyClick(e) {
+function keyClick(e) { // looking for clicks  - wheel or on-screen keyboard
     e = window.event ? event.srcElement : e.target;
-    if (e.classList.contains('keyboard') && keysEnabled) {
+    if (e.classList.contains('keyboard') && keysEnabled) {  // on-screen keyboard click
         guess = e.getAttribute('id');
-        console.log(guess, e);
-        
+        if (puzzle.alpha.includes(guess)) { // filters duplicates
+            soundPluck.play()
+            return; 
+        } 
         hideKeys();
-
-        setTimeout(function () {
+        setTimeout(function () { // set timing for wheel activation. 
             showPush();
-        }, 2000);
-
-
-        
-        
-        // process guess
-        processGuess(e);
+        }, 1000);
+        processGuess(e); // send validated clicked-key for processing
     }
-    guess = e.getAttribute('id');
-    if (spinEnabled) {
-        if (guess === 'wheel' || guess === 'wof') {
-            wheel.spin();
-            hidePush()
-            console.log(wheel.sText, wheel.sValue);
-
-            if (!wheel.sText.length > 0) {
-                setTimeout(function () {
-                    showScore()
-                    showKeys();
-                }, 4500);
-            }
-            else {
-                hideKeys();
-                showPush();
-                if (wheel.sText === "BANKRUPT") {
-                    
-                    setTimeout(function () {
-                        sndPlay(snd.bankrupt);
-                    }, 5000);
-                    
-                
-                    // show value
-                }
-                if (wheel.sText === "LOSE TURN") {
-                    
-                    setTimeout(function () {
-                        sndPlay(snd.bankrupt);
-                    }, 5000);
-                    
-                
-                    // show value
-                }
-                if (wheel.sText === "FREE TURN") {
-                    
-                    setTimeout(function () {
-                        sndPlay(snd.wand);
-                    }, 5000);
-                    
-            
-                    // show value
-                }
-            }
-
-        }
-
-        // process spin
+    else if (spinEnabled && e.getAttribute('id') === 'wheel'|| spinEnabled && e.getAttribute('id') === 'wof') {  
+        wheel.spin(); // spin the wheel! 
+        hidePush() // disable wheel
+        processSpin();
+        if (puzzle.puzzleStatus === "loss") { roundLoss(); }
+        if (puzzle.puzzleStatus === "win") { roundWin(); }
     }
     return;
 }
 
+function processSpin() {
+    if (!wheel.sText.length > 0) { // received a $value wheel slot
+        setTimeout(function () { // pause before enabling keyboard
+            showScore();
+            showKeys(); // enable keyboard
+        }, 4000);
+    }
+    else { // received a non $ wheel slot
+        hideKeys(); // disable keys
+        hidePush(); // disable wheel 
+        if (wheel.sText === "BANKRUPT") {
+            setTimeout(function () {
+                soundBankrupt.play();
+                puzzle.triesLeft--;
+                puzzle.puzzleScore = 0;
+                showPush();
+                showScore();
+                bodyPart("remove");
+            }, 5000);
+        }
+        if (wheel.sText === "LOSE TURN") {
+            setTimeout(function () {
+                soundBankrupt.play();
+                puzzle.triesLeft--;
+                showPush();
+                showScore();
+                bodyPart("remove");
+            }, 5000);                
+        }
+        if (wheel.sText === "FREE TURN") {
+            setTimeout(function () {
+                soundWand.play();
+                if (puzzle.triesLeft < 10) {
+                    bodyPart("add");
+                    puzzle.triesLeft++;
+                }
+                showPush();
+                showScore();
+            }, 5000); 
+        }  
+    }
+}
 
 function processGuess(e) {
     guess = e.id;
     var time = 1000;
-
     if (puzzle.alpha.includes(guess)) { return; }  // filters noise, only non-dups pass
     matches = puzzle.setUsed(guess); // log letter as used (puzzle.alpha) and return # matches
     puzzle.tries++;
     if (matches > 0) { // good guess
         puzzle.correct++; // increment correct guesses
-        highlightKey(guess); // highlights key of pick      
+        highlightKey(guess); // highlights key of pick  
 
-        sndPlay(snd.ding); // sounds a ding for number of letters in puzzle
+        setTimeout(function () {
+            e.style.backgroundColor = "#007bff";
+            e.style.borderColor = "#007bff";
+        }, 2000);
+        
+        puzzle.puzzleScore += (matches * wheel.sValue);    
+
+        soundDing.play(); // sounds a ding for number of letters in puzzle
         for (i = 0; i < matches - 1; ++i) {
             setTimeout(function () {
-                sndPlay(snd.ding);
+                sndPlay(snd.ding); // must create a new audio object each iteration to avoid timing issue
             }, time);
             time += 1000;
         }
         setTimeout(function () {
             e.style.color ="#000000"
+            showScore();
         }, time);
-        time += 1500;
-
+        time += 4000;
         if (puzzle.correct === puzzle.unique) { /* puzzle solved */
-
-            sndPlay(snd.solved, 1);
-            puzzle.complete = true;
-            game.wins++
-            game.gameScore = + puzzle.puzzleScore;
-            if (debug) { console.log("You Win!") };
-            newRound();
-
+            puzzle.puzzleStatus = "win";
         }
     }
     else {  // bad guess
         e.style.color ="#de1738"
+        soundBuzzer.play()
         puzzle.incorrect++;
-        bodyPart("remove");
-        sndPlay(snd.buzzer, 1);
         puzzle.triesLeft--;
+        bodyPart("remove");  
+        showScore()
+        console.log("tryLeft: " + puzzle.triesLeft + " hImage: " + hangImgCount)
         if (puzzle.triesLeft === 0) {
-
-            sndPlay(snd.reveal, 1);
-            puzzle.complete = true;
-            game.losses++;
-            if (debug) { console.log("You Lose!") };
-            newRound();
-
+            puzzle.puzzleStatus = "loss";
         }
     }
-
+    showScore()
     letters.makeVisible(guess);
     letters.setBoard();
     dispBoard.textContent = letters.board;
+    setTimeout(function () {
+        if (puzzle.puzzleStatus === "loss") { roundLoss(); }
+        if (puzzle.puzzleStatus === "win") { roundWin(); }
+    }, 2000);
 }

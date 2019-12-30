@@ -1,4 +1,4 @@
-console.log("letter.js is linked");
+console.log("letter.js is linked - letters object");
 
 class Letters {
     constructor(d2Array, visible) {
@@ -25,6 +25,13 @@ class Letters {
                 }
             }
         }
+    }
+
+    makeAllVisible() {
+        for (i = 0; i < this.visible.length; i++) {
+            this.visible[i] = 1; 
+        }
+
     }
 
 } 

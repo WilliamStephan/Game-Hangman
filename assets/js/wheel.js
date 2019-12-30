@@ -1,4 +1,4 @@
-console.log("wheel.js is linked");
+console.log("wheel.js is linked - wheel object");
 
 class Wheel {
     constructor(slots) {
@@ -8,32 +8,29 @@ class Wheel {
         this.spinLast = "NEW GAME!"
         this.sText = "";
         this.sValue = 0;
-        this.sLives = 0
         this.guessMod = 0;
         this.currentDegree = 0;
-
     }
 
     spin() {
-        var rndSpin = rndWeighted(this.weights); // weighted random spin based on like wheel slat area
+        var rndSpin = rndWeighted(this.weights); // weighted random spin based on like wheel slot area
+        if (isNaN(this.wheel[rndSpin][0])) { // spin is alpha (bankrupt, lose turn or free spin)
+            this.sText = this.wheel[rndSpin][0]; // sets wheel object spin values
+            this.sValue = 0;
+        }
+        else { // spin is numeric ($ value)
+            this.sText = "";
+            this.sValue = parseInt(this.wheel[rndSpin][0]); // sets wheel object spin values
+        }
         var subLoc = Math.floor(Math.random() * (this.wheel[rndSpin].length - 1) + 1); // random for multiple same value wheel locations
         var offSet = 360 - this.wheel[rndSpin][subLoc]; // offset to keep the wheel synced 
         this.currentDegree = this.currentDegree + (this.wheel[rndSpin][subLoc] + 1080); // where the spin will land, plus 3 loops
         rotateWheel(wheel.currentDegree.toString()); // spin wheel - took way to long to figure out
-        this.currentDegree = this.currentDegree + offSet; // zero wheel position for next spin         
-        
-        this.resetSpinVar();
-        processSpin(this.wheel[rndSpin][0]);
-
+        this.currentDegree = this.currentDegree + offSet; // zero wheel position for next spin           
         this.spinLast = this.wheel[rndSpin][0]  // save spin location 
         return this.spinLast;
     }
 
-    resetSpinVar() {
-        this.sText = "";
-        this.sValue = 0;
-        this.sLives = 0;
-    }
 }
 
 function initWheel() {
@@ -52,32 +49,8 @@ function initWheel() {
 }
 
 function rotateWheel(rotateMe) {  // rotate wheel function
-    sndPlay(snd.spin, 1);
+    // sndPlay(snd.spin, 1);
+    soundSpin.play();
     rotateDeg = (rotateMe)
     Root.style.setProperty('--turn', rotateDeg + "deg") // using CSS variable 
-}
-
-function processSpin(spin) {
-    if (isNaN(spin)) {
-        wheel.sText = spin;
-        wheel.sValue = 0;
-    }
-    else {
-        wheel.sText = "";
-        wheel.sValue = parseInt(spin);
-    }
-    if (wheel.sText.length > 0) {
-        switch (wheel.sText) {
-            case "BANKRUPT":
-                wheel.sLives = -1
-                break;
-            case "LOSE TURN":
-                wheel.sLives = -1
-                break;
-            case "FREE TURN":
-                wheel.sLives = 1
-                break;
-            default:
-        }
-    }
 }

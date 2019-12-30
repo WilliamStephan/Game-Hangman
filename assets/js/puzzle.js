@@ -1,18 +1,20 @@
-console.log("puzzle.js is linked");
+console.log("puzzle.js is linked - puzzle object");
 
 class Puzzle {
     constructor(puzzle) {
     this.puzzle = puzzle;
+    this.maxTries = 0;
     this.tries = 0;
     this.triesLeft = 0;
     this.complete = false;
-    this.words = 0
+    this.words = 0;
     this.letters = 0;
     this.unique = 0;
     this.vowels = 0;
     this.correct = 0;
     this.incorrect = 0;
     this.puzzleScore = 0;
+    this.puzzleStatus = "";
     this.alpha = "";
     }
     setUsed(pick) {
@@ -28,6 +30,7 @@ class Puzzle {
 function initPuzzle(sentence, triesAllowed) {
     puzzle = new Puzzle(sentence);
     puzzle.triesLeft = triesAllowed;
+    puzzle.maxTries = triesAllowed;
     puzzle.vowels = getVowels(puzzle.puzzle);
     puzzle.words = totalWords(puzzle.puzzle);
     puzzle.letters = totalLetters(puzzle.puzzle);

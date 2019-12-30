@@ -1,5 +1,4 @@
-console.log("game.js is linked")
-
+console.log("game.js is linked - game object")
 
 class Game {
     constructor(game, hint) {
@@ -9,7 +8,7 @@ class Game {
         this.wins = 0;
         this.losses = 0;
         this.round = 0;
-        this.rounds = 10;
+        this.rounds = 2;
         this.correct = 0;
         this.incorrect = 0;
         this.gameScore = 0;
