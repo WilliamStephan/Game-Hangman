@@ -28,35 +28,47 @@
 <body>
 
   <div class="nav-container">
-    <nav class="navbar navbar-expand-md navbar-light ">
-      <div class="site-name"><a class="navbar-brand" href="#">Hangman of Fortune</a></div>
+    <nav class="navbar navbar-expand-sm navbar-light ">
+      <div id="hmlogo" class="site-name"><img src="assets/images/logo.png" alt="logo"></div>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <input class="btn btn-primary menu" id="reset" type="button" value="Reset" onclick="this.blur();">
-          <input class="btn btn-primary menu" id="rules" type="button" value="Rules" onclick="this.blur();">
-          <input class="btn btn-primary menu" id="about" type="button" value="About" onclick="this.blur();">
+          <input class="btn btn-danger menu" id="reset" type="button" value="Reset" onclick="this.blur();">
+          <input class="btn btn-danger menu" id="rules" type="button" value="Rules" onclick="this.blur();">
+          <input class="btn btn-danger menu" id="about" type="button" value="About" onclick="this.blur();">
         </div>
       </div>
     </nav>
   </div>
 
   <div class="container-fluid">
-    <div class="row keys-row flex-nowrap no-gutters">
 
-      <div id="scores">
-        <p><span id="game" class="enMoney"></span></p>
-        <p><span id="round" class="enMoney"></span></p>
-        <p><span id="left"></span></p>
+    <div id="info-wrapper">
+
+      <div id="sc01" class="scores">
+        <img class="label" src="assets/images/left.png" alt="">
       </div>
 
+      <div id="sc02" class="scores">
+        <p id="wins">TEST</p>
+        <p id="left"></p>
+      </div>
+
+      <div id="sc03" class="scores">
+        <img class="label" src="assets/images/score.png" alt="">
+      </div>
+
+      <div id="sc04" class="scores">
+        <p id="round" class="enMoney"></p>
+        <p id="game" class="enMoney"></p>
+      </div>
     </div>
-    
-    <div class="row keys-row flex-nowrap no-gutters">
-      <div id="hangman" class="col">
+
+    <div id="game-wrapper">
+      <div id="hangman">
         <img id="h-0" width="266rem" height="400rem" src="assets/images/h-00.png">
         <img id="h-1" class="gallow" width="266rem" height="400rem" src="assets/images/h-01.png">
         <img id="h-2" class="gallow" width="266rem" height="400rem" src="assets/images/h-02.png">
@@ -68,70 +80,73 @@
         <img id="h-8" class="gallow" width="266rem" height="400rem" src="assets/images/h-08.png">
         <img id="h-9" class="gallow" width="266rem" height="400rem" src="assets/images/h-09.png">
         <img id="h-10" class="gallow" width="266rem" height="400rem" src="assets/images/h-10.png">
+        
+
       </div>
       <div id="wof" class="col">
-        <img id="bk-wheel" width="400rem" height="400rem" src="assets/images/wbg.jpg">
-        <img id="bk-nswheel" width="400rem" height="400rem" src="assets/images/nsbg.jpg">
+        <img id="bk-wheel" width="400rem" height="400rem" src="assets/images/wbg.png">
+        <img id="bk-nswheel" width="400rem" height="400rem" src="assets/images/nsbg.png">
         <img id="wheel" width="400rem" height="400rem" src="assets/images/wheel.png">
+        <img id="ulose" width="400rem" height="400rem" src="assets/images/lose.png">
+        <img id="uwin" width="400rem" height="400rem" src="assets/images/win.png">
       </div>
     </div>
 
-    <div class="row keys-row flex-nowrap">
-      <div class="col">
-        <p class="mono-type" id="board"></p>
-        <p class="mono-type√" id="hint"></p>
-        <p class="mono-type" id="spin"></p>
-      </div>
-    </div>
 
-    <div class="row keys-row no-gutters flex-nowrap">
-      <div class="col" no-gutters>
-        <input class="btn btn-primary keyboard" id="A" type="button" value="A" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="B" type="button" value="B" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="C" type="button" value="C" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="D" type="button" value="D" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="E" type="button" value="E" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="F" type="button" value="F" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="G" type="button" value="G" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="H" type="button" value="H" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="I" type="button" value="I" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="J" type="button" value="J" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="K" type="button" value="K" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="L" type="button" value="L" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="M" type="button" value="M" onclick="this.blur();">
+    <div class="game-lower">
+      <div class="row keys-row flex-nowrap">
+        <div class="col">
+          <p class="mono-type" id="board"></p>
+          <p id="hint"></p>
+        </div>
       </div>
-    </div>
 
-    <div class="row keys-row flex-nowrap">
-      <div class=col>
-        <input class="btn btn-primary keyboard" id="N" type="button" value="N" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="O" type="button" value="O" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="P" type="button" value="P" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="Q" type="button" value="Q" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="R" type="button" value="R" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="S" type="button" value="S" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="T" type="button" value="T" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="U" type="button" value="U" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="V" type="button" value="V" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="W" type="button" value="W" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="X" type="button" value="X" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="Y" type="button" value="Y" onclick="this.blur();">
-        <input class="btn btn-primary keyboard" id="Z" type="button" value="Z" onclick="this.blur();">
+      <div class="row keys-row no-gutters row1 flex-nowrap">
+        <div class="col" no-gutters>
+          <input class="btn btn-danger keyboard" id="A" type="button" value="A" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="B" type="button" value="B" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="C" type="button" value="C" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="D" type="button" value="D" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="E" type="button" value="E" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="F" type="button" value="F" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="G" type="button" value="G" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="H" type="button" value="H" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="I" type="button" value="I" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="J" type="button" value="J" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="K" type="button" value="K" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="L" type="button" value="L" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="M" type="button" value="M" onclick="this.blur();">
+        </div>
       </div>
+
+      <div class="row keys-row no-gutters row2 flex-nowrap">
+        <div class=col>
+          <input class="btn btn-danger keyboard" id="N" type="button" value="N" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="O" type="button" value="O" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="P" type="button" value="P" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="Q" type="button" value="Q" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="R" type="button" value="R" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="S" type="button" value="S" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="T" type="button" value="T" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="U" type="button" value="U" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="V" type="button" value="V" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="W" type="button" value="W" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="X" type="button" value="X" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="Y" type="button" value="Y" onclick="this.blur();">
+          <input class="btn btn-danger keyboard" id="Z" type="button" value="Z" onclick="this.blur();">
+        </div>
+      </div>
+      <div id="spacer1">.</div>
     </div>
+    <div id="spacer2">.</div>
+
   </div>
+
 
   <div class="container-fluid footer-container">
     <div class="footer-sub">
       <div class="left-side">
-        <span class=social>
-          <a id=sm1 href="https://twitter.com/StephanBill" target="_blank"><i class="fab fa-twitter-square"></i></a>
-          <a id=sm2 href="https://www.facebook.com/bill.stephan.315" target="_blank"><i
-              class="fab fa-facebook-square"></i></a>
-          <a id=sm3 href="https://www.instagram.com/2tallbill" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a id=sm4 href="https://www.linkedin.com/in/stephanbill" target="_blank"><i class="fab fa-linkedin"></i></a>
-          <a id=sm5 href="https://twitter.com/StephanBill" target="_blank"><i class="fab fa-flickr"></i></a>
-        </span>
+        <span>UT-Austin Coding Bootcamp</span>
       </div>
       <div class="right-side copyright">
         <p>© 2019 Copyright:
@@ -152,7 +167,6 @@
   <script src="./assets/js/app.js"></script>
 
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-  <script src="https://kit.fontawesome.com/53e5088cef.js" crossorigin="anonymous"></script>
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
     crossorigin="anonymous"></script>

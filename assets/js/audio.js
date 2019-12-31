@@ -1,6 +1,6 @@
 console.log("audio.js is linked - preload wav files"); // timing issues creating audio objects on the fly.
 
-const effect = [["ding", "assets/sound/ding.wav"], ["bankrupt", "assets/sound/bankrupt.wav"], ["spin", "assets/sound/spin.wav"], ["reveal", "assets/sound/reveal.wav"], ["solved", "assets/sound/solved.wav"], ["buzzer", "assets/sound/buzzer.wav"], ["wand", "assets/sound/wand.wav"], ["pluck", "assets/sound/pluck.wav"]];
+const effect = [["ding", "assets/sound/ding.wav"], ["bankrupt", "assets/sound/bankrupt.wav"], ["spin", "assets/sound/spin.wav"], ["reveal", "assets/sound/reveal.wav"], ["solved", "assets/sound/solved.wav"], ["buzzer", "assets/sound/buzzer.wav"], ["wand", "assets/sound/wand.wav"], ["pluck", "assets/sound/pluck.wav"], ["bell", "assets/sound/bell.wav"]];
 
 var snd = {}; // sound effects table for fast key access: snd.effect 
 for (i = 0; i < effect.length; i++) {
@@ -38,3 +38,7 @@ soundSolved.preload = 'auto';
 var soundPluck = new Audio();
 soundPluck.src = snd.pluck;
 soundPluck.preload = 'auto';
+
+var soundBell = new Audio();
+soundBell.src = snd.bell;
+soundBell.preload = 'auto';

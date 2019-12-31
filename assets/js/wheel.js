@@ -48,9 +48,8 @@ function initWheel() {
     wheel.totalWeight = arrSum(wheel.weights);
 }
 
-function rotateWheel(rotateMe) {  // rotate wheel function
-    // sndPlay(snd.spin, 1);
-    soundSpin.play();
+function rotateWheel(rotateMe, s = true) {  // rotate wheel function
+    if (s) { soundSpin.play() }; // play spin sound
     rotateDeg = (rotateMe)
     Root.style.setProperty('--turn', rotateDeg + "deg") // using CSS variable 
 }

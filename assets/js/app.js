@@ -1,14 +1,15 @@
 console.log("app.js is linked - global vars & main app logic"); // global vars & main app logic
 
-const debug = true;
+const debug = false;
 
 const Root = document.documentElement, gRoot = getComputedStyle(Root);
 const dispBoard = document.getElementById("board");
 const dispHint = document.getElementById("hint");
-const dispSpin = document.getElementById("spin");
+const dispSpin = document.getElementById("spin");  //wipe
 const dispRound = document.getElementById("round");
 const dispGame = document.getElementById("game");
 const dispLeft = document.getElementById("left");
+const dispWins = document.getElementById("wins");
 const gameData = ["bloodcurdling Test Me", "schizophrenia", "country road take me home", "flabbergasted", "port and starboard", "globalization", "consciousness", "weightlifting", "championship match", "mathematician", "razzamatazzes", "hypothesizing", "new baby buggy"]
 const gameHint = ["strange phrase", "a condition", "song", "a condition", "a place", "business speak", "a condition", "an activity", "event", "person", "a condition", "a condition", "thing"]
 const wheelItems = ["500", "550", "600", "650", "700", "800", "900", "2500", "1000000", "LOSE TURN", "FREE TURN", "BANKRUPT"];
@@ -27,7 +28,7 @@ start();
 
 function start() {
     initGame(); if (debug) { console.log(game) } // initialize game object
-    initWheel(); if (debug) { console.log(wheel) } // initialize wheel and weighting    
+    initWheel(); if (debug) { console.log(wheel) } // initialize wheel and weighting   
     newRound();
     showScore();
     showPush();
@@ -36,6 +37,7 @@ function start() {
 
 // keyboard event
 function keyStroke(e) {
+    if (debug) { console.log("keyboard entry: " + e.key + " was attempted") } 
     if (spinEnabled && e.key === "Enter") { // spin the wheel with a keyboard enter
         wheel.spin(); // spin the wheel! 
         hidePush() // disable wheel
@@ -58,11 +60,13 @@ function keyStroke(e) {
             processGuess(e);  // send key validated keystroke for processing
         }
     }
+    if (debug) { console.log("validated keyboard entry: " + guess + " was processed") }
 }
 
 // click event
 function keyClick(e) { // looking for clicks  - wheel or on-screen keyboard
     e = window.event ? event.srcElement : e.target;
+    if (debug) { console.log("click event: " + e.getAttribute('id') + " was clicked") }
     if (e.classList.contains('keyboard') && keysEnabled) {  // on-screen keyboard click
         guess = e.getAttribute('id');
         if (puzzle.alpha.includes(guess)) { // filters duplicates
@@ -73,14 +77,24 @@ function keyClick(e) { // looking for clicks  - wheel or on-screen keyboard
         setTimeout(function () { // set timing for wheel activation. 
             showPush();
         }, 1000);
+        if (debug) { console.log("validated keyboard click: " + guess + " was processed") }
         processGuess(e); // send validated clicked-key for processing
     }
-    else if (spinEnabled && e.getAttribute('id') === 'wheel'|| spinEnabled && e.getAttribute('id') === 'wof') {  
+    else if (spinEnabled && e.getAttribute('id') === 'wheel') {  
         wheel.spin(); // spin the wheel! 
         hidePush() // disable wheel
         processSpin();
+        if (debug) { console.log("validated spin click: " + e.getAttribute('id') + " was processed") }
         if (puzzle.puzzleStatus === "loss") { roundLoss(); }
         if (puzzle.puzzleStatus === "win") { roundWin(); }
+    }
+    else if (e.getAttribute('id') === 'reset') { 
+        if (debug) { console.log("validated reset click: " + e.getAttribute('id') + " was processed") }
+        rotateWheel("0", false)
+        soundWand.play();
+        setTimeout(function () {
+            start() 
+        }, 4000);      
     }
     return;
 }
@@ -100,7 +114,6 @@ function processSpin() {
                 soundBankrupt.play();
                 puzzle.triesLeft--;
                 puzzle.puzzleScore = 0;
-                showPush();
                 showScore();
                 bodyPart("remove");
             }, 5000);
@@ -109,7 +122,6 @@ function processSpin() {
             setTimeout(function () {
                 soundBankrupt.play();
                 puzzle.triesLeft--;
-                showPush();
                 showScore();
                 bodyPart("remove");
             }, 5000);                
@@ -124,7 +136,14 @@ function processSpin() {
                 showPush();
                 showScore();
             }, 5000); 
-        }  
+        }
+        if (puzzle.triesLeft === 0) {
+            setTimeout(function () {
+                if (puzzle.puzzleStatus === "loss") { roundLoss(); }
+                puzzle.puzzleStatus = "loss"; /* puzzle NOT solved */
+            }, 1000);            
+        }
+        else { showPush(); }
     }
 }
 
@@ -139,16 +158,17 @@ function processGuess(e) {
         highlightKey(guess); // highlights key of pick  
 
         setTimeout(function () {
-            e.style.backgroundColor = "#007bff";
-            e.style.borderColor = "#007bff";
+            e.style.backgroundColor = "#dc3545";
+            e.style.borderColor = "#dc3545";
         }, 2000);
         
-        puzzle.puzzleScore += (matches * wheel.sValue);    
-
         soundDing.play(); // sounds a ding for number of letters in puzzle
+        puzzle.puzzleScore += wheel.sValue; // increments puzzle score with ding sounds 
         for (i = 0; i < matches - 1; ++i) {
             setTimeout(function () {
+                puzzle.puzzleScore += wheel.sValue;
                 sndPlay(snd.ding); // must create a new audio object each iteration to avoid timing issue
+                dispRound.textContent = puzzle.puzzleScore; // increments puzzle score with ding sounds 
             }, time);
             time += 1000;
         }
@@ -159,18 +179,21 @@ function processGuess(e) {
         time += 4000;
         if (puzzle.correct === puzzle.unique) { /* puzzle solved */
             puzzle.puzzleStatus = "win";
+            hideKeys();
+            hidePush();
         }
     }
     else {  // bad guess
-        e.style.color ="#de1738"
+        e.style.color ="#000000"
         soundBuzzer.play()
         puzzle.incorrect++;
         puzzle.triesLeft--;
         bodyPart("remove");  
         showScore()
-        console.log("tryLeft: " + puzzle.triesLeft + " hImage: " + hangImgCount)
         if (puzzle.triesLeft === 0) {
-            puzzle.puzzleStatus = "loss";
+            puzzle.puzzleStatus = "loss"; /* puzzle NOT solved */
+            hideKeys();
+            hidePush();
         }
     }
     showScore()
@@ -180,5 +203,5 @@ function processGuess(e) {
     setTimeout(function () {
         if (puzzle.puzzleStatus === "loss") { roundLoss(); }
         if (puzzle.puzzleStatus === "win") { roundWin(); }
-    }, 2000);
+    }, 1000);
 }

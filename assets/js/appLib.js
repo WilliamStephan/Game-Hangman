@@ -1,6 +1,8 @@
 console.log("appLib.js is linked - function library specifically for hangman game");
 
 function newRound() {
+    hangImgCount = 0; 
+    gallowsReset(); 
     game.round++;
     if (debug) { console.log("round is: " + game.round) }
     if (game.round > 1) {
@@ -21,12 +23,14 @@ function newRound() {
     for (e of document.querySelectorAll('.keyboard')) { 
         e.classList.remove("disabled");
         e.style.color = "#ffffff";
-        e.style.backgroundColor = "#007bff";
+        e.style.backgroundColor = "#dc3545";
     }
     for (e of document.querySelectorAll('.gallow')) e.style.visibility = 'hidden';
     
     dispBoard.textContent = letters.board;
     dispHint.textContent = game.hint[game.randIndex[game.round]];
+    dispWins.textContent = game.wins + "/" + game.losses + " R: " + game.round;
+    
 
     if (debug) { console.log(puzzle) };
     if (debug) { console.log(letters) };
@@ -43,7 +47,7 @@ function showKeys() {
         e = document.getElementById(char);
         e.classList.add("disabled");
         e.style.color = "black";
-        e.style.backgroundColor = "#007bff";
+        e.style.backgroundColor = "#dc3545";
     });
     keysEnabled = true;
 }
@@ -95,47 +99,68 @@ function bodyPart(action) {
 }
 
 function showScore() {
+    var curStatus = "";
     dispGame.textContent = game.gameScore;
     dispRound.textContent = puzzle.puzzleScore;
     dispLeft.textContent = puzzle.triesLeft;
+    dispWins.textContent = game.wins + "/" + game.losses + " R: " + game.round;
+    dispHint.textContent = game.hint[game.randIndex[game.round]];
 }
 
 function roundWin() {
     letters.makeAllVisible();
     letters.setBoard();
     dispBoard.textContent = letters.board;
-    setTimeout(function () {
-        soundSolved.play();
-    }, 2000);
+    dispWins.textContent = game.wins + "/" + game.losses + " R: " + game.round;
+    e = document.getElementById('uwin');
+    e.style.visibility = 'visible';
+    soundSolved.play();
     hideKeys()
     puzzle.complete = true;
     game.wins++;
-    gallowsReset();  
     showScore();
     setTimeout(function () {
-        newRound();
-    }, 5000);
+        var nxtRound = confirm( "Continue to the next round?" );
+        if ( nxtRound ) {
+            gallowsReset();
+            newRound();
+        } else {
+            rotateWheel("0", false)
+            start() 
+        } 
+    }, 3000); 
 }
 
 function roundLoss() {
     letters.makeAllVisible();
     letters.setBoard();
     dispBoard.textContent = letters.board;
-    setTimeout(function () {
-        soundReveal.play();
-    }, 2000);
-
+    dispWins.textContent = game.wins + "/" + game.losses + " R: " + game.round;
+    e = document.getElementById('ulose');
+    e.style.visibility = 'visible';
+    soundBell.play();
     hideKeys()
     puzzle.puzzleScore = 0;
     puzzle.complete = true;
     game.losses++;
-    gallowsReset();
+    showScore();
     setTimeout(function () {
+    var nxtRound = confirm( "Continue to the next round?" );
+    if ( nxtRound ) {
+        gallowsReset();
         newRound();
-    }, 5000);
+    } else {
+        rotateWheel("0", false)
+        start() 
+    }      
+    }, 3000);
 }
 
 function gallowsReset() {
+    e = document.getElementById('ulose');
+    e.style.visibility = 'hidden';
+    e = document.getElementById('uwin');
+    e.style.visibility = 'hidden';
     for (i = 0; i < 11; i++) {
         e = document.getElementById('h-' + i);
         e.style.visibility = 'hidden';
