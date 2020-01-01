@@ -30,10 +30,12 @@
   <div class="nav-container">
     <nav class="navbar navbar-expand-sm navbar-light ">
       <div id="hmlogo" class="site-name"><img src="assets/images/logo.png" alt="logo"></div>
+      
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
         aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+      
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
         <div class="navbar-nav">
           <input class="btn btn-danger menu" id="reset" type="button" value="Reset" onclick="this.blur();">
@@ -65,35 +67,42 @@
         <p id="round" class="enMoney"></p>
         <p id="game" class="enMoney"></p>
       </div>
+
     </div>
 
     <div id="game-wrapper">
       <div id="hangman">
-        <img id="h-0" width="266rem" height="400rem" src="assets/images/h-00.png">
-        <img id="h-1" class="gallow" width="266rem" height="400rem" src="assets/images/h-01.png">
-        <img id="h-2" class="gallow" width="266rem" height="400rem" src="assets/images/h-02.png">
-        <img id="h-3" class="gallow" width="266rem" height="400rem" src="assets/images/h-03.png">
-        <img id="h-4" class="gallow" width="266rem" height="400rem" src="assets/images/h-04.png">
-        <img id="h-5" class="gallow" width="266rem" height="400rem" src="assets/images/h-05.png">
-        <img id="h-6" class="gallow" width="266rem" height="400rem" src="assets/images/h-06.png">
-        <img id="h-7" class="gallow" width="266rem" height="400rem" src="assets/images/h-07.png">
-        <img id="h-8" class="gallow" width="266rem" height="400rem" src="assets/images/h-08.png">
-        <img id="h-9" class="gallow" width="266rem" height="400rem" src="assets/images/h-09.png">
-        <img id="h-10" class="gallow" width="266rem" height="400rem" src="assets/images/h-10.png">
-        
+        <img id="h-0" alt="empty gallows" src="assets/images/h-00.png">
+        <img id="h-1" class="gallow" alt="gallows with head" src="assets/images/h-01.png">
+        <img id="h-2" class="gallow" alt="gallows with head and eyes" src="assets/images/h-02.png">
+        <img id="h-3" class="gallow" alt="gallows with head, eyes and torso" src="assets/images/h-03.png">
+        <img id="h-4" class="gallow" alt="gallows with head, eyes, torso and left arm" src="assets/images/h-04.png">
+        <img id="h-5" class="gallow" alt="gallows with head, eyes, torso, left arm and right arm"
+          src="assets/images/h-05.png">
+        <img id="h-6" class="gallow" alt="gallows with head, eyes, torso, left arm, right arm and left leg"
+          src="assets/images/h-06.png">
+        <img id="h-7" class="gallow" alt="gallows with head, eyes, torso, left arm, right arm, left leg and right leg"
+          src="assets/images/h-07.png">
+        <img id="h-8" class="gallow"
+          alt="gallows with head, eyes, torso, left arm, right arm, left leg, right leg and left foot"
+          src="assets/images/h-08.png">
+        <img id="h-9" class="gallow"
+          alt="gallows with head, eyes, torso, left arm, right arm, left leg, right leg, left foot and right foot"
+          src="assets/images/h-09.png">
+        <img id="h-10" class="gallow" alt="gallows with hanging stick man" src="assets/images/h-10.png">
 
       </div>
       <div id="wof" class="col">
-        <img id="bk-wheel" width="400rem" height="400rem" src="assets/images/wbg.png">
-        <img id="bk-nswheel" width="400rem" height="400rem" src="assets/images/nsbg.png">
-        <img id="wheel" width="400rem" height="400rem" src="assets/images/wheel.png">
-        <img id="ulose" width="400rem" height="400rem" src="assets/images/lose.png">
-        <img id="uwin" width="400rem" height="400rem" src="assets/images/win.png">
+        <img id="bk-wheel" alt="background" src="assets/images/wbg.png">
+        <img id="bk-nswheel" alt="disabled prize wheel" src="assets/images/nsbg.png">
+        <img id="wheel" alt="prize wheel" src="assets/images/wheel.png">
+        <img id="ulose" alt="you lose" src="assets/images/lose.png">
+        <img id="uwin" alt="you win" src="assets/images/win.png">
       </div>
     </div>
 
-
     <div class="game-lower">
+
       <div class="row keys-row flex-nowrap">
         <div class="col">
           <p class="mono-type" id="board"></p>
@@ -102,7 +111,7 @@
       </div>
 
       <div class="row keys-row no-gutters row1 flex-nowrap">
-        <div class="col" no-gutters>
+        <div class="col">
           <input class="btn btn-danger keyboard" id="A" type="button" value="A" onclick="this.blur();">
           <input class="btn btn-danger keyboard" id="B" type="button" value="B" onclick="this.blur();">
           <input class="btn btn-danger keyboard" id="C" type="button" value="C" onclick="this.blur();">
@@ -134,14 +143,14 @@
           <input class="btn btn-danger keyboard" id="X" type="button" value="X" onclick="this.blur();">
           <input class="btn btn-danger keyboard" id="Y" type="button" value="Y" onclick="this.blur();">
           <input class="btn btn-danger keyboard" id="Z" type="button" value="Z" onclick="this.blur();">
-        </div>
+        </div> 
       </div>
+
       <div id="spacer1">.</div>
     </div>
     <div id="spacer2">.</div>
 
   </div>
-
 
   <div class="container-fluid footer-container">
     <div class="footer-sub">
@@ -150,13 +159,12 @@
       </div>
       <div class="right-side copyright">
         <p>© 2019 Copyright:
-          <a href="https://williamstephan.github.io">OldDog.dev</a></p>
+          <a href="https://williamstephan.github.io">Oldguy.dev</a></p>
       </div>
     </div>
   </div><!-- .container-fluid .footer-container -->
 
   <!-- Custom JavaScript -->
-
   <script src="./assets/js/includeLib.js"></script>
   <script src="./assets/js/audio.js"></script>
   <script src="./assets/js/game.js"></script>
@@ -178,5 +186,4 @@
     crossorigin="anonymous"></script>
 
 </body>
-
 </html>
