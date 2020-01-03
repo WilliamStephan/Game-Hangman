@@ -10,7 +10,6 @@ function newRound() {
         game.incorrect += puzzle.incorrect;
         game.gameScore += puzzle.puzzleScore;
         puzzle.puzzleScore = 0;
-        showScore();
     }
     if (game.round === game.length) { // cycled through all puzzles - restart   
         start();
@@ -18,6 +17,7 @@ function newRound() {
 
     initPuzzle(game.game[game.randIndex[game.round]], 10); // (random puzzle)
     initLetters(puzzle.puzzle, new Array(puzzle.puzzle.length).fill(0));
+    showScore();
     
     // resets disabled key buttons and hide hangman stacked images 
     for (e of document.querySelectorAll('.keyboard')) { 
@@ -36,6 +36,19 @@ function newRound() {
     if (debug) { console.log(letters) };
 }
 
+function roundConfirm() {
+        setTimeout(function() {
+        var nxtRound = confirm( "Continue to the next round?" );
+        if ( nxtRound ) {
+            gallowsReset();
+            newRound();
+        } else {
+            rotateWheel("0", false)
+            start() 
+        } 
+    }, 3000);
+}
+  
 function hideKeys() {
     for (e of document.querySelectorAll('.keyboard')) e.classList.add("disabled");
     keysEnabled = false;
@@ -119,16 +132,7 @@ function roundWin() {
     puzzle.complete = true;
     game.wins++;
     showScore();
-    setTimeout(function () {
-        var nxtRound = confirm( "Continue to the next round?" );
-        if ( nxtRound ) {
-            gallowsReset();
-            newRound();
-        } else {
-            rotateWheel("0", false)
-            start() 
-        } 
-    }, 3000); 
+    roundConfirm();
 }
 
 function roundLoss() {
@@ -144,16 +148,7 @@ function roundLoss() {
     puzzle.complete = true;
     game.losses++;
     showScore();
-    setTimeout(function () {
-    var nxtRound = confirm( "Continue to the next round?" );
-    if ( nxtRound ) {
-        gallowsReset();
-        newRound();
-    } else {
-        rotateWheel("0", false)
-        start() 
-    }      
-    }, 3000);
+    roundConfirm();
 }
 
 function gallowsReset() {

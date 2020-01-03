@@ -1,3 +1,5 @@
+/* css variable for rotation of wheel.png */ 
+
 :root {
     --turn : 0deg;
 }
@@ -13,9 +15,9 @@ body {
     max-width: 960px;
 }
 
-.container-fluid {  
+.main-container {  
     padding: 0rem;
-    background: url("../images/hmbg.png") no-repeat center center fixed; 
+    background: url("../images/hmbg.png") no-repeat center top fixed; 
     
 }
 
@@ -375,10 +377,64 @@ body {
     color: #ffffff;
 }
 
+@media (max-width: 650px) {
+    html {
+    font-size: 14px;
+    }
+    .main-container { 
+        background: url("../images/hmbg650.png") no-repeat center top fixed; 
+    }
+    #hmlogo {
+        padding-top: .5rem;
+    }
+    .navbar-toggler-icon {
+        margin-top: -1rem;
+        padding-top: 0rem;
+        z-index: 400;
+    }
+}
+
+
+@media (max-width: 568px) {
+    html {
+    font-size: 13px;
+    }
+    .main-container { 
+        background: url("../images/hmbg568.png") no-repeat center top fixed; 
+    }
+    #hmlogo {
+        padding-top: .5rem;
+    }
+    .navbar-toggler-icon {
+        margin-top: -1rem;
+        padding-top: 0rem;
+        z-index: 400;
+    }
+}
+
+@media (max-width: 490px) {
+    html {
+    font-size: 11px;
+    }
+    .main-container { 
+        background: url("../images/hmbg490.png") no-repeat center top fixed; 
+    }
+    #hmlogo {
+        padding-top: .5rem;
+    }
+    .navbar-toggler-icon {
+        margin-top: -1rem;
+        padding-top: 0rem;
+        z-index: 400;
+    }
+}
 
 @media (max-width: 414px) {
     html {
     font-size: 11px;
+    }
+    .main-container { 
+        background: url("../images/hmbg414.png") no-repeat center top fixed; 
     }
     #hmlogo {
         padding-top: .5rem;
@@ -394,6 +450,9 @@ body {
     html {
     font-size: 9.5px;
     }
+    .main-container { 
+        background: url("../images/hmbg375.png") no-repeat center top fixed; 
+    }
     #hmlogo {
         padding-top: .5rem;
     }
@@ -408,6 +467,9 @@ body {
     html {
     font-size: 8px;
     }
+    .main-container { 
+        background: url("../images/hmbg320.png") no-repeat center top fixed; 
+    }
     #hmlogo {
         padding-top: .5rem;
     }
@@ -417,95 +479,3 @@ body {
         z-index: 400;
     }
 }
-
-
-
-/*
-@media (max-width: 750px) {
-    html {
-    font-size: 22px;
-    }
-}
-
-@media (max-width: 690px) {
-    html {
-    font-size: 20px;
-    }
-
-
-}
-
-@media (max-width: 630px) {
-    html {
-    font-size: 18px;
-    }
-
-
-}
-
-@media (max-width: 575px) {
-    html {
-    font-size: 16px;
-    }
-
-    
-}
-
-@media (max-width: 515px) {
-    html {
-    font-size: 14px;
-    }
-
-
-}
-
-@media (max-width: 450px) {
-    html {
-    font-size: 12px;
-    }
-
-
-
-}
-
-@media (max-width: 390px) {
-    html {
-    font-size: 10px;
-    }
-
-
-    
-}
-
-@media (max-width: 330px) {
-    html {
-    font-size: 8px;
-    }
-
-
-}
-
-@media (max-width: 260px) {
-    html {
-    font-size: 6px;
-    }
-
-
-}
-
-@media (max-width: 200px) {
-    html {
-    font-size: 5px;
-    }
-
-}
-
-@media (max-width: 165px) {
-    html {
-    font-size: 4px;
-    }
-
-
-}
-
-*/
