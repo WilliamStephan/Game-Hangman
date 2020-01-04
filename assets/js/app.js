@@ -80,7 +80,7 @@ function keyClick(e) { // looking for clicks  - wheel or on-screen keyboard
         if (debug) { console.log("validated keyboard click: " + guess + " was processed") }
         processGuess(e); // send validated clicked-key for processing
     }
-    else if (spinEnabled && e.getAttribute('id') === 'wheel') {  
+    if (spinEnabled && e.getAttribute('id') === 'wheel') {  
         wheel.spin(); // spin the wheel! 
         hidePush() // disable wheel
         processSpin();
@@ -88,13 +88,28 @@ function keyClick(e) { // looking for clicks  - wheel or on-screen keyboard
         if (puzzle.puzzleStatus === "loss") { roundLoss(); }
         if (puzzle.puzzleStatus === "win") { roundWin(); }
     }
-    else if (e.getAttribute('id') === 'reset') { 
+    if (e.getAttribute('id') === 'reset') { 
         if (debug) { console.log("validated reset click: " + e.getAttribute('id') + " was processed") }
         rotateWheel("0", false)
         soundWand.play();
         setTimeout(function () {
             start() 
         }, 4000);      
+    }
+    if (e.getAttribute('id') === 'rules') { 
+        if (debug) { console.log("validated rules click: " + e.getAttribute('id') + " was processed") }
+        alert('Rule/Instructions\n' +
+        'Click wheel or press the "ENTER" key to start the game!\n\n' +
+
+        'The goal is to solve the word puzzle with less than 10 wrong letters choices amd maximize your prize money. The value of each correct letter is determined by the proceeding spin!\n\n ' + 
+        'Watch out for those BANKRUPTS and GOOD LUCK!!!\n\n'
+        );   
+    }
+    if (e.getAttribute('id') === 'rules') { 
+    window.open(
+        'https://github.com/WilliamStephan/Hangman/blob/master/README.md',
+        '_blank' // <- This is what makes it open in a new window.
+      );
     }
     return;
 }
