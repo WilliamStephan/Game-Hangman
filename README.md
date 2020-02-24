@@ -19,7 +19,7 @@ it is deployed at [OldGuy.dev](https://oldguy.dev).
 * Spins locations are determined via a weighted random generator (roulette algorithm – taken from pseudo-code posted on Stack Overflow for c++). There is a second randomizer that determines the actual slot, if more than one of the same values exist.
 * Multi-dimensional arrays were used in letter object for a visibility flag, wheel slot locations in degrees and the audio sound effects key.
 * Bootstrap was used for nav-bar, keyboard buttons and footer
-* Game elements are objects (game, puzzle, letters and wheel)
+* All game elements are objects (game, puzzle, letters and wheel)
 * Created a reusable js library for functions I may use in other projects (Lodash is not concerned):
   * randomIndex(x) – returns an array of numbers of x length (from 0 to x-1) in random order (used for randomizing an array of x.length)
   * rndWeighted(arrOfWeights[]) –  returns a single random element arrOfWeights[] based on weighting.
